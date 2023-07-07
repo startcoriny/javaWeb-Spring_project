@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+<!-- configuration 요소는 MyBatis 설정 파일의 루트 요소이며, MyBatis의 주요 설정을 포함 -->
+	
+	<typeAliases>
+	<!-- 타입 별칭(Type Alias)을 설정하는데 사용 -->
+
+		<typeAlias type="com.spring.ex01.MemberVO" alias="memberVO" />
+		<!-- typeAlias 태그를 사용하여 클래스와 별칭을 매핑 -->
+		<!-- DAO에서 SQL문으로 값을 전달할 때 또는 SQL문을 실행한 후 가져온 값을 DAO로 전달할 떄
+			사용할 빈을 생성 -->
+		<!-- com.spring.ex01.MemberVO 클래스를 memberVO라는 별칭으로 설정 -->
+	</typeAliases>
+
+
+	<environments default="development">
+	<!-- MyBatis의 실행 환경을 설정하는데 사용 -->
+	<!-- default 속성은 기본 실행 환경을 설정 -->
+	
+		<environment id="development">
+		<!-- development라는 실행 환경을 정의 -->
+		<!-- JDBC 트랜잭션 관리자와 POOLED 데이터 소스를 사용하도록 설정 -->
+		
+			<transactionManager type="JDBC" />
+
+			<dataSource type="POOLED">
+			<!-- 데이터 베이스 연결을 설정 -->
+			
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url" value="JDBC:oracle:thin:@localhost:1521:orcl" />
+				<property name="username" value="scott" />
+				<property name="password" value="12341234" />
+
+			</dataSource>
+
+		</environment>
+
+	</environments>
+
+	<mappers>
+	<!--  매퍼 파일을 설정하는데 사용 -->
+	
+		<mapper resource="mybatis/mappers/member.xml" />
+		<!-- 회원 기능 관련 SQL문이 있는 member.xml을 읽어 들임.
+			※ 반드시 지정한 패키지 이름과 일치해야함 ※ -->
+	</mappers>
+</configuration>
