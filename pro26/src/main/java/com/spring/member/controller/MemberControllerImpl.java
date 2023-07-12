@@ -134,57 +134,58 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 	
 	
 	
-//	@Override
-//	public ModelAndView searchMember(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//			
-//			request.setCharacterEncoding("utf-8");
-//			String act = request.getParameter("action");
-//			
-//			MemberVO vo = new MemberVO();
-//			
-//			String value = request.getParameter("value");
-//			
-//			System.out.println(act);
-//			System.out.println(value);
-//			
-//			if(act.equals("all")) {
-//				
-//				vo = new MemberVO(value, value, value, value);	
-//			}
-//			
-//			
-//			if(act.equals("id")) {
-//				
-//				vo.setId(value);
-//				
-//				
-//			}else if(act.equals("pwd")) {
-//				
-//				vo.setPwd(value);
-//				
-//				
-//			}else if(act.equals("name")) {
-//				
-//				vo.setName(value);
-//				
-//				
-//			}else if(act.equals("email")) {
-//				
-//				vo.setEmail(value);
-//				
-//			}
-//			
-//			System.out.println(vo.getId()+vo.getPwd()+vo.getName()+vo.getEmail());
-//			
-//			System.out.println("시작 vo 객체 값 : " + vo);
-//			List list = memberService.searchMembers(vo);
-//			System.out.println("마지막 vo객체 값 : " + list);
-//			ModelAndView mav = new ModelAndView("/listMembers");
-//			mav.addObject("membersList", list);
-//			
-//			return mav;
-//
-//	}
+	@Override
+	@RequestMapping( value = "/member/searchMember.do", method =  {RequestMethod.GET, RequestMethod.POST})
+	public ModelAndView searchMember(HttpServletRequest request, HttpServletResponse response) throws Exception {
+			
+
+			String act = request.getParameter("action");
+			
+			MemberVO vo = new MemberVO();
+			
+			String value = request.getParameter("value");
+			
+			System.out.println(act);
+			System.out.println(value);
+			
+			if(act.equals("all")) {
+				
+				vo = new MemberVO(value, value, value, value);	
+			}
+			
+			
+			if(act.equals("id")) {
+				
+				vo.setId(value);
+				
+				
+			}else if(act.equals("pwd")) {
+				
+				vo.setPwd(value);
+				
+				
+			}else if(act.equals("name")) {
+				
+				vo.setName(value);
+				
+				
+			}else if(act.equals("email")) {
+				
+				vo.setEmail(value);
+				
+			}
+			
+			System.out.println(vo.getId()+vo.getPwd()+vo.getName()+vo.getEmail());
+			
+			System.out.println("시작 vo 객체 값 : " + vo);
+			List list = memberService.searchMembers(vo);
+			System.out.println("마지막 vo객체 값 : " + list);
+			ModelAndView mav = new ModelAndView("/listMembers");
+			mav.addObject("membersList", list);
+			
+			return mav;
+
+	}
 	
 	
 

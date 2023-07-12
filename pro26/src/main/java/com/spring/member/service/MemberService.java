@@ -15,7 +15,7 @@ public interface MemberService {
 	 
 	 public int updateMember(MemberVO membeVO) throws DataAccessException;
 //
-//	 public List<MemberVO> searchMembers(MemberVO vo) throws DataAccessException;
+	 public List<MemberVO> searchMembers(MemberVO vo) throws DataAccessException;
 
 
 }

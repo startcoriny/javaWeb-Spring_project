@@ -68,13 +68,13 @@ public class MemberDAOImpl implements MemberDAO {
 	}   
 
 
-//	@Override
-//	public List<MemberVO> searchMembers(MemberVO vo) {
-//
-//		List<MemberVO> memberVO = sqlSession.selectList("mapper.member.searchMembers", vo);
-//		System.out.println("가져옴 memberVO : " + memberVO);
-//		return memberVO;
-//	}
+	@Override
+	public List<MemberVO> searchMembers(MemberVO vo) {
+
+		List<MemberVO> memberVO = sqlSession.selectList("mapper.member.searchMembers", vo);
+		System.out.println("가져옴 memberVO : " + memberVO);
+		return memberVO;
+	}
 
 
 

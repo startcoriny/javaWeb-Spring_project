@@ -16,6 +16,6 @@ public interface MemberDAO {
 	 
 	 public int updateMember(MemberVO memberVO) throws DataAccessException ;
 
-//	 public List<MemberVO> searchMembers(MemberVO vo);
+	 public List<MemberVO> searchMembers(MemberVO vo);
 
 }

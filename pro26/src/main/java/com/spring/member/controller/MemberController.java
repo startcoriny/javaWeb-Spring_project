@@ -21,6 +21,6 @@ public interface MemberController {
 	
 	public ModelAndView updateMember(@ModelAttribute("info") MemberVO memberVO, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-//	public ModelAndView searchMember(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView searchMember(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 }
