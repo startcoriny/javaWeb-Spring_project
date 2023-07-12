@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans">
+
+	<bean id="propertyPlaceholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+<!-- PropertyPlaceholderConfigurer 클래스를 이용해 데이터베이스 설정 관련 정보를 jdbc.properties
+		파일에서 읽어 들임-->
+		<property name="locations">
+
+			<value>/WEB-INF/config/jdbc.properties</value>
+
+		</property>
+
+	</bean>
+
+	<bean id="dataSource" class="org.apache.ibatis.datasource.pooled.PooledDataSource">
+	<!-- 마이바티스에서 제공하는 PooledDataSource 클래스를 이용해 dataSource빈을 생성 -->	
+		<property name="driver" value="${jdbc.driverClassName}" />
+		
+		<property name="url" value="${jdbc.url}" />
+		
+		<property name="username" value="${jdbc.username}" />
+		
+		<property name="password" value="${jdbc.password}" />
+	
+	</bean>
+
+
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+	<!-- SqlSessionFactoryBean클래스를 이용해 dataSource속성에 dataSource빈을 설정 -->
+		
+		<property name="dataSource" ref="dataSource" />
+		
+		<property name="configLocation" value="classpath:mybatis/model/modelConfig.xml" />
+		<!-- configLocation속성에 modelConfig.xml을 설정 -->
+		
+		<property name="mapperLocations" value="classpath:mybatis/mappers/*.xml" />
+		<!-- mapperLocations 속성에 mybatis/mappers 패키지의 모든 매퍼 파일들을 읽어 들여와 설정 -->
+	
+	</bean>
+
+
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+	<!-- SqlSessionTemplate클래스를 이용해 sqlSession빈을 생성 -->
+	<!--  MyBatis와 Spring을 연결하는 역할 -->
+	<!-- SqlSessionFactory를 생성자 인자로 받아 MyBatis의 SqlSession을 래핑하여 Spring의 트랜잭션 관리와 예외 처리를 지원 -->
+	
+		<constructor-arg index="0" ref="sqlSessionFactory"/>
+	<!-- constructor-arg 요소를 사용하여 생성자 인자를 설정 -->
+	<!-- index="0"은 첫 번째 생성자 인자를 의미 -->
+	<!-- ref="sqlSessionFactory"는 "sqlSessionFactory"라는 식별자를 가진 다른 빈을 참조하여 해당 인스턴스의 생성자에 전달 -->
+	
+	</bean>
+
+
+<!-- 	<bean id="memberDAO" class="com.spring.member.dao.MemberDAOImpl">
+		
+		<property name="sqlSession" ref="sqlSession"></property>
+		sqlSession빈을 memberDAO빈 속성에 주입
+	
+	</bean> -->
+	<!-- MemberDAO는 개발자가 만든 클래스이므로 XML에서 설정하지 않고 자바 코드에서 애너테이션으로 설정. -->
+
+</beans>
