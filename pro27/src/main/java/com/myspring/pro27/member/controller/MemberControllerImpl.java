@@ -116,7 +116,7 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 	
 	
 	@Override
-	@RequestMapping(value = { "/member/loginForm.do", "/member/memberForm.do","/member/modMemberForm.do" }, method =  RequestMethod.GET)
+	@RequestMapping(value = { "/member/loginForm1.do", "/member/memberForm.do","/member/modMemberForm.do" }, method =  RequestMethod.GET)
 	public ModelAndView form( HttpServletRequest request, HttpServletResponse response) throws Exception {
 				//로그인창에서 요청시 매개변수 result가 전송되면 변수 result에 값을 저장. 최초로 로그인창을 요청할때는 매개변수 result가 전송되지 않으므로 뮤시
 		String viewName = getViewName(request);
@@ -249,6 +249,8 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 						       HttpServletResponse response) throws Exception {
 		//String viewName = getViewName(request);
 		String viewName = (String)request.getAttribute("viewName");
+		// 인터셉터에서 바인딩된 뷰이름을 가져옴
+		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result",result);
 		mav.setViewName(viewName);
