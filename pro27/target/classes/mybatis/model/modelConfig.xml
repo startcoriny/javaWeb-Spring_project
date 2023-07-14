@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- MyBatis에서 사용할 Java 클래스에 대한 별칭을 정의하는 역할 -->
+	
+	<typeAliases>
+		<!-- typeAliases태그로 마이바이트세어 데이터 전달에 사용될 memberVO빈을 설정 -->
+		
+		<typeAlias type="com.myspring.pro27.member.vo.MemberVO"  alias="memberVO" />
+	<!-- type: 별칭을 지정할 Java 클래스의 전체 경로를 지정 -->
+	<!-- alias: 지정한 Java 클래스에 대한 별칭을 지정 -->
+	<!-- <typeAliases> 요소를 사용하여 Java 클래스에 대한 별칭을 설정하면, 
+			MyBatis에서 해당 클래스를 사용하는 SQL 문장에서 별칭으로 사용 -->
+			<!-- MemberVO에 대한 alias를 설정. -->
+	</typeAliases>
+
+</configuration>
