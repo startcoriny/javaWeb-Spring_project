@@ -42,8 +42,16 @@
 	</servlet>
 		
 	<servlet-mapping>
+	<!-- servlet-mapping 요소는 web.xml 파일에서 서블릿을 URL 패턴에 매핑하는 데 사용 -->
+	<!-- servlet-name이 "appServlet"으로 설정되어 있고, url-pattern이 "/"로 설정되어 있으므로, 모든 요청은 "appServlet" 서블릿으로 매핑 -->
 		<servlet-name>appServlet</servlet-name>
+		<!-- servlet-context.xml 파일을 로드하여 Spring MVC 구성을 설정 -->
+		
+		
 		<url-pattern>/</url-pattern>
+	<!-- url-pattern이 "/"로 설정되면, 해당 서블릿은 모든 URL 요청을 처리 -->	
+	<!-- Spring MVC의 DispatcherServlet은 모든 요청을 받아들이고, 해당 요청을 처리하는 컨트롤러에게 전달 -->
+	<!-- 컨트롤러는 @RequestMapping을 사용하여 각 URL 패턴에 따라 요청을 처리 -->
 	</servlet-mapping>
 
 </web-app>

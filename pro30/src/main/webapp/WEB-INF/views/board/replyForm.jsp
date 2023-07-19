@@ -33,13 +33,13 @@
 </head>
 <body>
  <h1 style="text-align:center">답글쓰기</h1>
-  <form name="frmReply" method="post"  action="${contextPath}/board/addReply.do"   enctype="multipart/form-data">
+  <form name="frmReply" method="post"  action="${contextPath}/board/addNewArticle.do?parentNO=${parentNO}"   enctype="multipart/form-data">
   <!-- 답글 입력 후 전송 시 컨트롤러에 /board/addReply.do로 요청 -->
   
     <table align="center">
     <tr>
 			<td align="right"> 글쓴이:&nbsp; </td>
-			<td><input type="text" size="5" value="lee" disabled /> </td>
+			<td><input type="text" size="5" value="${parentNO}" disabled /> </td>
 		</tr>
 		<tr>
 			<td align="right">글제목:&nbsp;  </td>
@@ -52,7 +52,7 @@
 		<tr>
 			<td align="right">이미지파일 첨부:  </td>
 			<td> <input type="file" name="imageFileName"  onchange="readURL(this);" /></td>
-            <td><img  id="preview" src="#"   width=200 height=200/></td>
+            <td><img  id="preview" src=""   width=200 height=200/></td>
 		</tr>
 		<tr>
 			<td align="right"> </td>

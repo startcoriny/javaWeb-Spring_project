@@ -3,7 +3,6 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="contextPath" value="${pageContext.request.contextPath}" />
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -73,6 +72,7 @@ img {
 		 form.setAttribute("action", url);
 		 /* 전달된 요청명을 form태그의 action속성값에 설정 */
 		 
+		 console.log(parentNO);
 	     var parentNOInput = document.createElement("input");
 	     parentNOInput.setAttribute("type","hidden");
 	     parentNOInput.setAttribute("name","parentNO");
@@ -82,6 +82,12 @@ img {
 	     form.appendChild(parentNOInput);
 	     document.body.appendChild(form);
 		 form.submit();
+	 }
+	 
+	 function fn_reply_form2(obj){
+ 		 // 수정반영하기 클릭시 컨트롤러에  수정 데이터르 ㄹ전송
+		 obj.action="${contextPath}/board/replyForm.do?parentNO=${article.articleNO}";
+		 obj.submit();
 	 }
 	 
 	 function readURL(input) {
@@ -206,7 +212,8 @@ img {
 	  				<input type=button value="삭제하기" onClick="fn_remove_article('${contextPath}/board/removeArticle.do', ${article.articleNO})"> --%>
 					<!-- 삭제하기 클릭시 fn_remove_article()자바 스크립트 함수를 호출하면서 articleNO를 전달 -->
 					<input type=button value="리스트로 돌아가기" onClick="backToList(this.form)"> 
-					<input type=button value="답글쓰기" onClick="fn_reply_form('${contextPath}/board/replyForm.do', ${article.articleNO})">
+					<%-- <input type=button value="답글쓰기" onClick="fn_reply_form('${contextPath}/board/replyForm.do', ${article.articleNO})"> --%>
+					<input type=button value="답글쓰기" onClick="fn_reply_form2(this.form)">
 					<!-- 답글 쓰기 클릭시 fn_reply_form()함수를 호출하면서 요청명과 글 번호를 전달 -->
 					
 				</td>

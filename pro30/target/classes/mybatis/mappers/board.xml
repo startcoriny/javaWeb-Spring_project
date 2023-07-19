@@ -35,11 +35,11 @@
   
 	<!--단일이미지 추가  -->
 	 
-  <insert id="insertNewArticle"  parameterType="java.util.Map">
-  <!-- 글 정보를 Map으로 전달 -->
+<insert id="insertNewArticle"  parameterType="java.util.Map">
+<!--   글 정보를 Map으로 전달 -->
 		<![CDATA[
-			INSERT into t_board(articleNO,  title, content, imageFileName, id)
-			VALUES(#{articleNO},#{title},	#{content}, #{imageFileName},	#{id})
+			INSERT into t_board( articleNO, parentNO,  title, content, imageFileName, id)
+			VALUES( #{articleNO}, #{parentNO}, #{title}, #{content}, #{imageFileName},	#{id})
 		]]>      
 	</insert>
 	
@@ -83,7 +83,7 @@
 
  <!--다중 이미지 추가 SQL문 -->   
 
-    <insert id="insertNewArticle"  parameterType="java.util.Map">
+    <insert id="insertNewArticle1"  parameterType="java.util.Map">
     <![CDATA[
       insert into t_board(articleNO, id, title, content, imageFileName)
       values(#{articleNO}, #{id}, #{title}, #{content}, null)

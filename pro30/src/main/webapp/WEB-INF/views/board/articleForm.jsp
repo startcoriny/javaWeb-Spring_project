@@ -34,6 +34,8 @@
 		  $("#d_file").append("<br>"+"<input type='file' name='file"+cnt+"' />");
 		  cnt++;
 	  }  
+	  /* 파일 업로드 기능을 동적으로 추가 */
+	  
 </script>
 
 
@@ -58,17 +60,15 @@
 			</tr>
 			<tr>
 				<td align="right">이미지파일 첨부:</td>
-				<td><input type="file" name="imageFileName"
-					onchange="readURL(this);" /></td>
-				<!-- onchange - HTML의 이벤트 처리기(Attribute)
-	     				 작성한 JS를 통해 변화가 일어났는지를 감지 -->
+				<td><input type="file" name="imageFileName" onchange="readURL(this);" /></td>
+				<!-- onchange - HTML의 이벤트 처리기(Attribute) 작성한 JS를 통해 변화가 일어났는지를 감지 -->
 				<!-- readURL() - 주로 파일 업로드 기능과 관련하여 사용되며, 사용자가 파일 선택 대화 상자를 통해 파일을 선택하면 이벤트가 발생
-	     				  선택한 파일의 정보를 읽거나 해당 파일을 처리.
-	     				   -->
+	     				  선택한 파일의 정보를 읽거나 해당 파일을 처리. -->
 				<td><img id="preview" src="#" width=200 height=200 /></td>
 				
 				<td align="right">이미지파일 첨부</td>
 				<td align="left"> <input type="button" value="파일 추가" onClick="fn_addFile()"/></td>
+				<!-- 파일 추가를 클릭하면 div에 동적으로 파일 업로드가 추가됨 -->
 				
 				
 	  		</tr>
