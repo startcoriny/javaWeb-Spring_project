@@ -38,6 +38,7 @@
           <c:otherwise>
 	        <a href="${contextPath}/member/loginForm.do"><h3>로그인</h3></a>
 	        <%-- 로그인 링크를 클릭하면 로그인 창을 요청 --%>
+	        
 	      </c:otherwise>
 	   </c:choose>     
 	   

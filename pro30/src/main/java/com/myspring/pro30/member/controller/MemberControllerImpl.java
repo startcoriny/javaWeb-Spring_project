@@ -214,10 +214,20 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 	@Override
 	@RequestMapping(value = "/member/login.do", method = RequestMethod.POST)
 	public ModelAndView login(@ModelAttribute("member") MemberVO member,
-			// 로그인창에서 전송되 id와 비밀번호를 MemberVO객체인 member에 저장
+			// @ModelAttribute : 메서드 매개변수 또는 메서드 레벨에서 사용, 주로 뷰와 컨트롤러 간의 데이터를 바인딩하는 용도로 사용
+			// 메서드 매개변수에 @ModelAttribute 어노테이션을 붙이면 해당 객체가 자동으로 생성되고, HTTP 요청 파라미터를 해당 객체의 필드에 자동으로 바인딩
+			// 사용자의 입력 데이터만을(ex> 입력창에서 id와 pw만 입력했다면 다른 정보가 오는게 아닌 id와 pw만 바인딩됨) 객체로 받아오는데 사용
+			// 즉, 이 프로젝트에서는 MemberVO의 member라는 객체를 modelAttrivute가 자동으로 만들어서 로그인폼에 정보를 바인딩하였고
+			// 그 값을 MemberVO member라는 매개변수에 저장하여 컨트롤러에서 사용 가능하게 만듬.
+
 				              RedirectAttributes rAttr,
+				              // RedirectAttributes :  리다이렉트 시에 데이터를 전달하는 방법 중 하나
+				              // 일반적으로 리다이렉트를 할 때, URL 쿼리 파라미터나 경로 변수를 이용하여 데이터를 전달할 수 있지만, 
+				              // RedirectAttributes를 사용하면 리다이렉트 시에 URL이나 경로에 직접적으로 노출되지 않고 데이터를 전달
 				              // RedirectAttributes 클래스를 이용해 로그인 실패 시 다시 로그인 창으로 리다이렉트하여 실패 메시지 전달
 		                       HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		
 	ModelAndView mav = new ModelAndView();
 	memberVO = memberService.login(member);
 	// login()메서드를 호출하면서 로그인 정보를 전달
@@ -232,8 +242,17 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 		    
 		    String action = (String)session.getAttribute("action");
 		    // 로그인 성공시 세션에 저장된 action값을 가져옴
+		    // 밑에서 remove로 지워도 action변수에는 받아온 값이 그대로 저장되어있음
+		    // loginForm에서 action으로 요청 하는 매핑 뒤에 ? 이후의 오는 값들은
+		    // 로그인 요청이 성공했을 때, 리다이렉트할 URL을 나타냄
+		    // 로그인 컨트롤러에서 로그인 성공 시 세션에 "action"이라는 속성으로 해당 값이 저장
+		    // ? 뒤에 오는 부분은 쿼리 스트링(Query String)이라고 불리며, 주로 요청 파라미터를 전달하는 용도로 사용
+		    // 
+		    
+		    System.out.println(action + " : 가져온 action");
 		    
 		    session.removeAttribute("action");
+		    
 		    if(action!= null) {
 		    	// action값이 null이 아니면 action값을 뷰이름으로 지정해 글쓰기 창으로 이동.
 		       mav.setViewName("redirect:"+action);
@@ -241,11 +260,13 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 		       mav.setViewName("redirect:/member/listMembers.do");	
 		    }
 		    
+		  
 		    
 	}else {
 		    rAttr.addAttribute("result","loginFailed");
 		    // 로그인 실패시 실패 메시지를 로그인 창으로 전달
 		    mav.setViewName("redirect:/member/loginForm.do");
+		    // 리다이렉트할 URL을 문자열로 반환(RedirectAttributes클래스)
 		    // 로그인 실패시 다시 로그인 창으로 리다이렉트
 	}
 	return mav;
@@ -267,6 +288,9 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 	
 	@RequestMapping(value = "/member/*Form.do", method =  RequestMethod.GET)
 	private ModelAndView form(@RequestParam(value= "result", required=false) String result,
+	// required  :  해당 요청 매개변수가 반드시 필요한지를 지정하는 역할
+	// required=false 이면 설정된 매개변수는 해당 요청 매개변수가 없어도 메서드가 정상적으로 호출되며, 매개변수는 null로 초기화
+			
 							  @RequestParam(value= "action", required=false) String action,
 							  // 로그인 성공 후 수행할 글쓰기 요청명을 action에 저장
 							  // 로그인 성공 후 바로 글쓰기 창으로 이동
@@ -276,10 +300,12 @@ public class MemberControllerImpl extends MultiActionController implements Membe
 		// 인터셉터에서 바인딩된 뷰이름을 가져옴
 		HttpSession session = request.getSession();
 		session.setAttribute("action", action);
+		System.out.println(action + " : 받아온 action값");
 		// 글쓰기 창 요청명을 action 속성으로 세션에 저장함.
 		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result",result);
+		System.out.println(result + " : 받아온 result값");
 		mav.setViewName(viewName);
 		System.out.println("*Form.do에서 받은 viewName : "+viewName);
 		return mav;

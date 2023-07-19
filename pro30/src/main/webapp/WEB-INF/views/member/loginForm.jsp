@@ -42,7 +42,8 @@
       </tr>
       <tr align="center">
          <td colspan="2">
-            <input type="submit" value="로그인" > 
+            <input type="submit" value="로그인" >
+            <!-- 로그인을 누르는 순간 action값 전달. --> 
             <input type="reset"  value="다시입력" > 
          </td>
       </tr>
