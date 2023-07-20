@@ -29,6 +29,9 @@
 	   <tr>
 	      <td width="200"><p align="right">아이디</td>
 	      <td width="400"><input type="text" name="id" value="${param.id } " disabled="disabled" ></td>
+	      <!-- param.id : 클라이언트가 수정하기 버튼을 클릭했을 때 쿼리 스트링으로 전달된 id 파라미터의 값을 나타냄 -->
+	      <!-- 클라이언트가 폼을 제출하면 param.id는 쿼리 스트링으로 다시 서버에 전달되어 해당 값이 컨트롤러의 @RequestMapping에 매핑된 메서드의 파라미터로 전달 -->
+	      <!-- 따라서 컨트롤러에서 따로 저장하지 않아도 다른 form에서 param.id를 사용하여 받아와서 활용 -->
 	   </tr>
 	   <tr>
 	      <td width="200"><p align="right">비밀번호</td>

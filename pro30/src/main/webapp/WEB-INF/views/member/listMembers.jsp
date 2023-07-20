@@ -44,8 +44,11 @@
       <td>${member.name}</td>
       <td>${member.email}</td>
       <td>${member.joinDate}</td>
-      <td><a href="${contextPath}/member/removeMember.do?id=${member.id }">삭제하기</a></td>
       <td><a href="${contextPath}/member/modMemberForm.do?id=${member.id }">수정하기</a></td>
+      <%-- 쿼리스트링 : url에 추가 정보를 전달하는 방법 중 하나  --%>
+      <%-- ?뒤에 키와 값으로 이루어진 데이터를 붙여서 전달하는 것을 의미  --%>
+      <%-- 쿼리스트링으로 member.id를 전달, 달러중괄호 안에 값을 넣는것은 el(표현 언어), member.id는 표현언어를 사용한 표현식  --%>
+      <td><a href="${contextPath}/member/removeMember.do?id=${member.id }">삭제하기</a></td>
       <!-- 삭제하기 클릭시 /member/removeMember.do로 요청 -->
     </tr>
   </c:forEach>   

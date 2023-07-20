@@ -18,7 +18,7 @@ public interface MemberController {
 	
 	public ModelAndView removeMember(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	public ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception;
+//	public ModelAndView form(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
 	public ModelAndView updateMember(@ModelAttribute("info") MemberVO memberVO, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
